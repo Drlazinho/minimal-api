@@ -18,12 +18,25 @@ namespace minimal_api.Infraestrutura.Db
 
         public DbSet<Administrador> Administradores { get; set; }
 
+        // Configuração do modelo e dados iniciais - Seed
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Administrador>()
+                .HasData(new Administrador
+                {
+                    Id = 1,
+                    Senha = "password",
+                    Email = "email@teste.com",
+                    Perfil = "Admin"
+                });
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var stringConnection = _configurationAppSettings.GetConnectionString("mySqlConnection")?.ToString();
             if (string.IsNullOrEmpty(stringConnection))
             {
-            optionsBuilder.UseMySql(stringConnection, ServerVersion.AutoDetect(stringConnection));
+                optionsBuilder.UseMySql(stringConnection, ServerVersion.AutoDetect(stringConnection));
             }
 
         }
