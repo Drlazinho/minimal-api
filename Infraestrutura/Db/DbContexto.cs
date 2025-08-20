@@ -17,6 +17,7 @@ namespace minimal_api.Infraestrutura.Db
         }
 
         public DbSet<Administrador> Administradores { get; set; }
+        public DbSet<Veiculo> Veiculos { get; set; }
 
         // Configuração do modelo e dados iniciais - Seed
         protected override void OnModelCreating(ModelBuilder modelBuilder)
