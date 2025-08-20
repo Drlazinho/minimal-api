@@ -9,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IAdministradorServico, AdministradorServico>();
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 builder.Services.AddDbContext<DbContexto>(options => options.UseMySql(
     builder.Configuration.GetConnectionString("mySqlConnection"),
     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("mySqlConnection"))          
@@ -16,7 +19,13 @@ builder.Services.AddDbContext<DbContexto>(options => options.UseMySql(
 
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Minimal API V1");
+    c.RoutePrefix = string.Empty; // Set Swagger UI at the app's root
+});
+
 app.MapPost("/login", ([FromBody] LoginDTO loginDTO, IAdministradorServico administradorServico) =>
 {
     if (administradorServico.Login(loginDTO) != null)
