@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using minimal_api.Dominio.ModelViews;
 using minimal_api.Infraestrutura.Db;
 using MinimalAPI.Dominio.DTOs;
 using MinimalAPI.Dominio.Interfaces;
@@ -25,6 +26,9 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Minimal API V1");
     c.RoutePrefix = string.Empty; // Set Swagger UI at the app's root
 });
+
+// Configure the HTTP request pipeline
+app.MapGet("/", () => Results.Json(new Home()));
 
 app.MapPost("/login", ([FromBody] LoginDTO loginDTO, IAdministradorServico administradorServico) =>
 {
