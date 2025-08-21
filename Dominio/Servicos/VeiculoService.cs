@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.HttpResults;
-using minimal_api.Dominio.Entidades;
-using minimal_api.Dominio.Interfaces;
-using minimal_api.Infraestrutura.Db;
-using MinimalAPI.Dominio.DTOs;
-using MinimalAPI.Dominio.Interfaces;
+using MinimalApi.Dominio.Entidades;
+using MinimalApi.Dominio.Interfaces;
+using MinimalApi.Infraestrutura.Db;
+using MinimalApi.Dominio.DTOs;
+using MinimalApi.Dominio.Interfaces;
 
-namespace MinimalAPI.Dominio.Servicos
+namespace MinimalApi.Dominio.Servicos
 {
     public class VeiculoServico : IVeiculoServico
     {
@@ -44,7 +44,7 @@ namespace MinimalAPI.Dominio.Servicos
             _context.Veiculos.Add(veiculo);
             _context.SaveChanges();
         }
-        public List<Veiculo> Todos(int pagina = 1, string nome = null, string? marca = null, int? ano = null)
+        public List<Veiculo> Todos(int? pagina, string nome, string? marca, int? ano)
         {
             var query = _context.Veiculos.AsQueryable();
 
@@ -63,8 +63,10 @@ namespace MinimalAPI.Dominio.Servicos
                 query = query.Where(v => v.Ano == ano.Value);
             }
 
+            int pageNumber = pagina ?? 1;
+
             return query
-                .Skip((pagina - 1) * 10)
+                .Skip((pageNumber - 1) * 10)
                 .Take(10)
                 .ToList();
         }

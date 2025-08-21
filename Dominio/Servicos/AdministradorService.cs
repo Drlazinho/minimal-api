@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using minimal_api.Dominio.Entidades;
-using minimal_api.Infraestrutura.Db;
-using MinimalAPI.Dominio.DTOs;
-using MinimalAPI.Dominio.Interfaces;
+using MinimalApi.Dominio.Entidades;
+using MinimalApi.Infraestrutura.Db;
+using MinimalApi.Dominio.DTOs;
+using MinimalApi.Dominio.Interfaces;
 
-namespace MinimalAPI.Dominio.Servicos
+namespace MinimalApi.Dominio.Servicos
 {
     public class AdministradorServico : IAdministradorServico
     {

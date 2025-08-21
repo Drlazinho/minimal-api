@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using minimal_api.Dominio.Entidades;
+using MinimalApi.Dominio.Entidades;
 
-namespace minimal_api.Infraestrutura.Db
+namespace MinimalApi.Infraestrutura.Db
 {
     public class DbContexto : DbContext
     {
