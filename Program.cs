@@ -26,7 +26,7 @@ var app = builder.Build();
 
 
 // Configure the HTTP request pipeline
-app.MapGet("/", () => Results.Json(new Home()));
+app.MapGet("/", () => Results.Json(new Home())).WithTags("Home");
 
 app.MapPost("/administradores/login", ([FromBody] LoginDTO loginDTO, IAdministradorServico administradorServico) =>
 {
@@ -38,7 +38,7 @@ app.MapPost("/administradores/login", ([FromBody] LoginDTO loginDTO, IAdministra
     {
         return Results.Unauthorized();
     }
-});
+}).WithTags("Administradores");
 
 app.MapPost("/veiculos", ([FromBody] VeiculoDTO veiculoDTO, IVeiculoServico veiculoServico) =>
 {
@@ -51,15 +51,62 @@ app.MapPost("/veiculos", ([FromBody] VeiculoDTO veiculoDTO, IVeiculoServico veic
     };
     veiculoServico.Incluir(veiculo);
     return Results.Created($"/veiculos/{veiculo.Id}", veiculo);
-});
+}).WithTags("Veiculos");
 
+#region Veiculos
 app.MapGet("/veiculos", (int? pagina, IVeiculoServico veiculoServico) =>
 {
 
     var veiculos = veiculoServico.Todos(pagina);
 
     return Results.Ok(veiculos);
-});
+}).WithTags("Veiculos");
+
+app.MapGet("/veiculos/{id}", ([FromRoute] int id, IVeiculoServico veiculoServico) =>
+{
+
+    var veiculos = veiculoServico.BuscaPorId(id);
+    if (veiculos == null)
+    {
+        return Results.NotFound();
+    }
+
+    return Results.Ok(veiculos);
+}).WithTags("Veiculos");
+
+app.MapPut("/veiculos/{id}", ([FromRoute] int id, VeiculoDTO veiculoDTO, IVeiculoServico veiculoServico) =>
+{
+
+    var veiculos = veiculoServico.BuscaPorId(id);
+    if (veiculos == null)
+    {
+        return Results.NotFound();
+    }
+
+    veiculos.Nome = veiculoDTO.Nome;
+    veiculos.Marca = veiculoDTO.Marca;
+    veiculos.Ano = veiculoDTO.Ano;
+
+    veiculoServico.Atualizar(veiculos);
+
+    return Results.Ok(veiculos);
+}).WithTags("Veiculos");
+
+app.MapDelete("/veiculos/{id}", ([FromRoute] int id, IVeiculoServico veiculoServico) =>
+{
+
+    var veiculos = veiculoServico.BuscaPorId(id);
+    if (veiculos == null)
+    {
+        return Results.NotFound();
+    }
+
+
+    veiculoServico.Apagar(veiculos);
+
+    return Results.NoContent();
+}).WithTags("Veiculos");
+#endregion
 
 app.UseSwagger();
 app.UseSwaggerUI(c =>
