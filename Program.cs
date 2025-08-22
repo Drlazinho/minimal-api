@@ -42,6 +42,12 @@ app.MapPost("/administradores/login", ([FromBody] LoginDTO loginDTO, IAdministra
 
 app.MapPost("/veiculos", ([FromBody] VeiculoDTO veiculoDTO, IVeiculoServico veiculoServico) =>
 {
+    var validacao = new ErrosDeValidacao();
+    if(string.IsNullOrEmpty(veiculoDTO.Nome) || string.IsNullOrEmpty(veiculoDTO.Marca) || veiculoDTO.Ano <= 0)
+    {
+        validacao.Mensagem = new List<string> { "Nome, Marca e Ano são obrigatórios." };
+        return Results.BadRequest(validacao);
+    }
 
     var veiculo = new Veiculo
     {
