@@ -18,6 +18,14 @@ namespace MinimalApi.Dominio.Servicos
             _context = context;
         }
 
+        public Administrador Incluir(Administrador administrador)
+        {
+            _context.Administradores.Add(administrador);
+            _context.SaveChanges();
+
+            return administrador;
+        }
+
         public Administrador? Login(LoginDTO loginDTO)
         {
             var adm = _context.Administradores
@@ -25,6 +33,24 @@ namespace MinimalApi.Dominio.Servicos
                 .FirstOrDefault();
 
             return adm;
+        }
+
+            public Administrador? BuscaPorId(int id)
+        {
+            return _context.Administradores
+                .Where(v => v.Id == id)
+                .FirstOrDefault();
+        }
+
+        public List<Administrador> Todos(int? pagina)
+        {
+            var query = _context.Administradores.AsQueryable();
+            int pageNumber = pagina ?? 1;
+
+            return query
+                .Skip((pageNumber - 1) * 10)
+                .Take(10)
+                .ToList();
         }
     }
 }
