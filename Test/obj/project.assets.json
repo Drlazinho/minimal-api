@@ -3127,8 +3127,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "c:\\Users\\lazbo\\Desktop\\.Net C#\\minimal-api\\Api\\minimal-api.csproj": {
-              "projectPath": "c:\\Users\\lazbo\\Desktop\\.Net C#\\minimal-api\\Api\\minimal-api.csproj"
+            "C:\\Users\\lazbo\\Desktop\\.Net C#\\minimal-api\\Api\\minimal-api.csproj": {
+              "projectPath": "C:\\Users\\lazbo\\Desktop\\.Net C#\\minimal-api\\Api\\minimal-api.csproj"
             }
           }
         }

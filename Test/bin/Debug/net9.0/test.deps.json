@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v9.0": {
-      "test/1.0.0": {
+      "Test/1.0.0": {
         "dependencies": {
           "MSTest": "3.6.4",
           "Microsoft.NET.Test.Sdk": "17.12.0",
@@ -14,7 +14,7 @@
           "Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions": "14.0.0.0"
         },
         "runtime": {
-          "test.dll": {}
+          "Test.dll": {}
         }
       },
       "Microsoft.ApplicationInsights/2.22.0": {
@@ -846,7 +846,7 @@
     }
   },
   "libraries": {
-    "test/1.0.0": {
+    "Test/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
