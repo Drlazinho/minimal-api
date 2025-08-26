@@ -6,6 +6,18 @@ Este projeto é uma API REST minimalista desenvolvida em .NET 9 utilizando Minim
 
 ---
 
+## Tecnologias Utilizadas
+
+- **.NET 9 (Minimal API)**
+- **C#**
+- **MySQL**
+- **Entity Framework Core**
+- **Autenticação JWT (Json Web Token)**
+- **Swagger (Swashbuckle)**
+- **Visual Studio Code**
+
+---
+
 ## Configuração
 
 ### 1. Banco de Dados
@@ -149,12 +161,15 @@ curl -X GET "http://localhost:5065/administradores" \
 | PUT    | `/veiculos/{id}`        | Atualiza veículo por ID          | Sim / adm, editor       | `{ "marca": "Fiat", "modelo": "Uno", "ano": 2021 }`                             |
 | DELETE | `/veiculos/{id}`        | Remove veículo por ID            | Sim / adm               | -                                                                               |-                                                                               |
 
-
 > **Obs:**  
 > - Envie o token JWT no header: `Authorization: Bearer {token}` para endpoints que exigem autenticação.
 > - Os perfis aceitos são `"adm"` e `"editor"` conforme o campo `perfil`.
 
 ---
+
+## Fluxograma
+
+![](.github/minimal-api.drawio.png)
 
 ## Observações
 
